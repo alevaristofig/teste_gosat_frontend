@@ -19,10 +19,9 @@ type Modalidade = {
 
 //export default function ConsultaCreditoComponent ({listaOfertasCredito}): Props {
 export default function ConsultaCreditoComponent (): ReactElement {
-
-  //const [consultaOferta,setConsultaOferta] = useState<ICredito>();
+  
   const [consultaOferta,setConsultaOferta] = useState([]);
-  const [modalidades,setModalidades] = useState([]);
+  const [loading,setLoading] = useState(true);
   const [token] = useState('4|gfyAYTwb4vLs06RxdHLUekfTYAHPWOGT4XQtgQt0319c6616');
 
   useEffect(() => {
@@ -38,21 +37,8 @@ export default function ConsultaCreditoComponent (): ReactElement {
               }
           })
           .then((response) => {                               
-              setConsultaOferta(response.data['instituicoes']);
-              let aux: string[] = [];
-              let r:string;
-
-              /*for(r in response.data['instituicoes']) {               
-                for(let m in response.data['instituicoes'][r]['modalidades']) {
-                   console.log(r);
-                   aux[r] = 't';
-                  //aux[r] = response.data['instituicoes'][r]['modalidades'][m]['nome'];
-                 // console.log('resp m', response.data['instituicoes'][r]['modalidades'][m]['nome'])
-                }                
-              }*/
-
-              console.log(aux);
-              
+              setConsultaOferta(response.data['instituicoes']); 
+              setLoading(false);              
           })
           .catch((erro) => {
               console.log(erro)
@@ -66,6 +52,12 @@ export default function ConsultaCreditoComponent (): ReactElement {
         <div className="container-fluid">
           <div>
           {
+            loading
+            ?
+              <div className="spinner-border text-primary mt-3" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            :
               consultaOferta.length === 0
               ?
                   <Alert variant='info'>
