@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 
 import CabecalhoComponent from './components/cabecalho';
+import MenuComponent from './components/menu';
 import ConsultaCreditoComponent from './components/ConsultaCreditoComponent';
 
 const ConsultaCredito = () => <ConsultaCreditoComponent />
@@ -13,9 +14,9 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <CabecalhoComponent />
+      <MenuComponent />
       <nav>
-        <ul>
-          <li><Link to="/consultarcredito">Consultar</Link></li>
+        <ul>         
           <li><Link to="/">Home</Link></li>
              <li><Link to="/about">About</Link></li>
              <li><Link to="/contact">Contact</Link></li>

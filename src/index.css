@@ -17,3 +17,8 @@ code {
   border-radius: 19px;
   margin-bottom: 3px;
 }
+
+.menu_esquerdo{  
+  width: 450px;
+  margin-right: 2px;
+}
