@@ -31,18 +31,18 @@ export default function ConsultaCreditoComponent (): ReactElement {
 
   useEffect(() => {
 
-     if(sessionStorage.getItem('token') === null) {            
-          navigate('/login');
-      } 
+    if(sessionStorage.getItem('token') === null) {            
+      navigate('/login');
+    } 
 
     let data = {
-      'cpf': '11111111111'
+      'cpf': sessionStorage.getItem('cpf')
     }
 
     axios.post(`http://localhost:8000/api/v1/simulacao/consultacredito`,data,
           {
               headers: {
-                  "Authorization": `Bearer ${token}`,                  
+                  "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  
               }
           })
           .then((response) => {                               
