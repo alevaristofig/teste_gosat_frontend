@@ -1,36 +1,27 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import CabecalhoComponent from './components/cabecalho';
 import MenuComponent from './components/menu';
 import ConsultaCreditoComponent from './components/ConsultaCreditoComponent';
-
-const ConsultaCredito = () => <ConsultaCreditoComponent />
-   const Home = () => <div>Home</div>;
-   const About = () => <div>About</div>;
-   const Contact = () => <div>Contact</div>;
+import SimulacaoCreditoComponent from './components/SimulacaoCreditoComponent';
 
 const App: React.FC = () => {
+
+  /*const consultarCredito = (cpf: string) => {
+    console.log('teste')
+  }*/
+
   return (
     <BrowserRouter>
       <CabecalhoComponent />
       <MenuComponent />
-      <nav>
-        <ul>         
-          <li><Link to="/">Home</Link></li>
-             <li><Link to="/about">About</Link></li>
-             <li><Link to="/contact">Contact</Link></li>
-        </ul>
-      </nav> 
-
+      <div className='d-flex float-start'>
         <Routes>
           <Route path="/consultarcredito" element={<ConsultaCreditoComponent />} />
-           <Route path="/" element={<Home />} />
-           <Route path="/about" element={<About />} />
-           <Route path="/contact" element={<Contact />} />
+          <Route path="/simularcredito" element={<SimulacaoCreditoComponent />} />
          </Routes>   
-
-      
+      </div> 
     </BrowserRouter>
   )
 }
