@@ -1,9 +1,12 @@
 import React, { ReactElement, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card  from 'react-bootstrap/Card';
 import Button  from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Alert  from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
+
+import MenuComponent from './menu';
 
 import { ICredito } from '../interfaces/Credito';
 import axios from 'axios';
@@ -24,7 +27,13 @@ export default function ConsultaCreditoComponent (): ReactElement {
   const [loading,setLoading] = useState(true);
   const [token] = useState('4|gfyAYTwb4vLs06RxdHLUekfTYAHPWOGT4XQtgQt0319c6616');
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+
+     if(sessionStorage.getItem('token') === null) {            
+          navigate('/login');
+      } 
 
     let data = {
       'cpf': '11111111111'
@@ -49,6 +58,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
   return (
     <div>
       <div className='d-flex'>
+        <MenuComponent />
         <div className="container-fluid">
           <div>
           {

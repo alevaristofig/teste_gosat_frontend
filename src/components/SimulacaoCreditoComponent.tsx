@@ -1,4 +1,5 @@
 import React, { ReactElement, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card  from 'react-bootstrap/Card';
 import Button  from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
@@ -7,13 +8,21 @@ import Table from 'react-bootstrap/Table';
 
 import axios from 'axios';
 
+import MenuComponent from './menu';
+
 export default function SimulacaoCreditoComponent (): ReactElement {
 
   const [simulaOferta,setSimulaOferta] = useState<any>();
   const [loading,setLoading] = useState(true);
   const [token] = useState('4|gfyAYTwb4vLs06RxdHLUekfTYAHPWOGT4XQtgQt0319c6616');
 
+  const navigate = useNavigate();
+
     useEffect(() => {
+
+      if(sessionStorage.getItem('token') === null) {            
+        navigate('/login');
+      } 
 
     let data = {
       'cpf': '11111111111',
@@ -39,6 +48,7 @@ export default function SimulacaoCreditoComponent (): ReactElement {
   return (
     <div>
       <div className='d-flex'>
+        <MenuComponent />
         <div className="container-fluid">
           {
             loading
