@@ -1,5 +1,6 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import Card  from 'react-bootstrap/Card';
 import Button  from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
@@ -12,9 +13,9 @@ import MenuComponent from './menu';
 
 export default function SimulacaoCreditoComponent (): ReactElement {
 
+  const { id, cod } = useParams();
   const [simulaOferta,setSimulaOferta] = useState<any>();
   const [loading,setLoading] = useState(true);
-  const [token] = useState('4|gfyAYTwb4vLs06RxdHLUekfTYAHPWOGT4XQtgQt0319c6616');
 
   const navigate = useNavigate();
 
@@ -25,31 +26,35 @@ export default function SimulacaoCreditoComponent (): ReactElement {
       } 
 
     let data = {
-      'cpf': '11111111111',
-      'instituicao_id': 2,
-      'codModalidade': 'a50ed2ed-2b8b-4cc7-ac95-71a5568b34ce'
+      'cpf': sessionStorage.getItem('cpf'),
+      'instituicao_id': id,
+      'codModalidade': cod
     }
 
     axios.post(`http://localhost:8000/api/v1/simulacao/simulacredito`,data,
           {
               headers: {
-                  "Authorization": `Bearer ${token}`,                  
+                  "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  
               }
           })
           .then((response) => {
+            console.log(response.data)
             setSimulaOferta(Object.entries(response.data));             
             setLoading(false);           
           })
           .catch((erro) => {
-              console.log(erro)
+              toast.error('Ocorreu um erro e a operação não foi realizada');     
           });          
-  },[])
+  },[]);
 
   return (
     <div>
       <div className='d-flex'>
         <MenuComponent />
         <div className="container-fluid">
+          <div>
+              <ToastContainer />
+          </div>
           {
             loading
             ?
@@ -71,6 +76,7 @@ export default function SimulacaoCreditoComponent (): ReactElement {
                       <th scope='col'>Valor Mínima</th>
                       <th scope='col'>Valor Máxima</th>
                       <th scope='col'>Juros Mês</th>
+                      <th scope='col'></th>
                     </tr>
                   </thead>
                   <tbody>                    

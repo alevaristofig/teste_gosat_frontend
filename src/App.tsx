@@ -20,7 +20,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/login" element={<LoginComponet />} />
           <Route path="/consultarcredito" element={<ConsultaCreditoComponent />} />
-          <Route path="/simularcredito" element={<SimulacaoCreditoComponent />} />
+          <Route path="/simularcredito/:id/:cod" element={<SimulacaoCreditoComponent />} />
           <Route path="/melhoroferta" element={<MelhorOfertaComponent />} />
          </Routes>         
     </BrowserRouter>

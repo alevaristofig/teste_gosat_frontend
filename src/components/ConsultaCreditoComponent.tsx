@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Card  from 'react-bootstrap/Card';
 import Button  from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
@@ -16,7 +16,8 @@ interface Props {
 }
 
 type Modalidade = {
-  nome: string;
+  nome: string,
+  cod: string
   // outros campos, se houver
 }
 
@@ -25,7 +26,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
   
   const [consultaOferta,setConsultaOferta] = useState([]);
   const [loading,setLoading] = useState(true);
-  const [token] = useState('4|gfyAYTwb4vLs06RxdHLUekfTYAHPWOGT4XQtgQt0319c6616');
+
 
   const navigate = useNavigate();
 
@@ -45,7 +46,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
                   "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  
               }
           })
-          .then((response) => {                               
+          .then((response) => {                                        
               setConsultaOferta(response.data['instituicoes']); 
               setLoading(false);              
           })
@@ -53,7 +54,9 @@ export default function ConsultaCreditoComponent (): ReactElement {
               console.log(erro)
               setConsultaOferta([]);
           });          
-  },[])
+  },[]);
+
+  const simular = (e: React.MouseEvent<HTMLButtonElement>,indice: number) => {}
 
   return (
     <div>
@@ -79,6 +82,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
                     <tr>
                         <th scope='col'>Instituição</th>                        
                         <th scope='col'>Modalidades</th>
+                        <th scope='col'></th>
                     </tr>
                   </thead>
                   <tbody>                                     
@@ -89,9 +93,15 @@ export default function ConsultaCreditoComponent (): ReactElement {
                                  <td>{c['nome']}</td>
                                  <td>{
                                     (c as any).modalidades.map((m: Modalidade) =>(
-                                      <td>{m['nome']},</td>
+                                      <>
+                                      <td>{m['nome']}</td>
+                                      <td>
+                                        <Link to={`/simularcredito/${c['id']}/${m['cod']}`} 
+                                          className="btn btn-sm btn-info text-white float-start me-4">Simular</Link>                                                                                                          
+                                      </td>
+                                    </>
                                     ))
-                                  }</td>
+                                  }</td>                                  
                              </tr>
                           ))
                       }                    

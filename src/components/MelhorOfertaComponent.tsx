@@ -118,21 +118,7 @@ export default function MelhorOfertaComponent (): ReactElement {
                                                         <button className="btn btn-sm btn-info" 
                                                             onClick={(e) => salvar(e, i)}>
                                                             Confirmar Oferta
-                                                        </button>
-                                                        <input type='hidden' id={`id_instiuicao_${i}`} value={o['id']} />
-                                                        <input type='hidden' id={`instituicao_financeira_${i}`} 
-                                                                value={o['instituicaoFinanceira']} />
-                                                        <input type='hidden' id={`cpf_${i}`} value={o['cpf']} />
-                                                        <input type='hidden' id={`modalidade_credito_${i}`} 
-                                                                value={o['modalidadeCredito']} />
-                                                        <input type='hidden' id={`valor_a_pagar_${i}`} 
-                                                               value={o['oferta']['valorAPagar']} />
-                                                        <input type='hidden' id={`valor_solicitado_${i}`} 
-                                                               value={o['oferta']['valorSolicitado']} />
-                                                        <input type='hidden' id={`taxa_juros_${i}`} 
-                                                               value={o['oferta']['taxaJuros']} />
-                                                        <input type='hidden' id={`qnt_parcelas_${i}`} 
-                                                               value={o['oferta']['qntParcelas']} />
+                                                        </button>                                                                                                                
                                                     </td>                                               
                                                 </tr>
                                             ))
