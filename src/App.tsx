@@ -6,6 +6,7 @@ import CabecalhoComponent from './components/cabecalho';
 import LoginComponet from './components/LoginComponent';
 import ConsultaCreditoComponent from './components/ConsultaCreditoComponent';
 import SimulacaoCreditoComponent from './components/SimulacaoCreditoComponent';
+import MelhorOfertaComponent from './components/MelhorOfertaComponent';
 
 const App: React.FC = () => {
 
@@ -20,6 +21,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<LoginComponet />} />
           <Route path="/consultarcredito" element={<ConsultaCreditoComponent />} />
           <Route path="/simularcredito" element={<SimulacaoCreditoComponent />} />
+          <Route path="/melhoroferta" element={<MelhorOfertaComponent />} />
          </Routes>         
     </BrowserRouter>
   )
