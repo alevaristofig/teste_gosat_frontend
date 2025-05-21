@@ -68,7 +68,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
 				</div>
                 <div className="row mt-3">
 					<div className="col-5 quebralinha d-flex justify-content-end">
-						<button type="submit" className="btn btn-primary" 
+						<button className="btn btn-primary" 
 							onClick={logar}>Logar</button>
 					</div>
 				</div>
