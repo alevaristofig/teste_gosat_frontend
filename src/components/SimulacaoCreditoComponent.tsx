@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import Card  from 'react-bootstrap/Card';
 import Button  from 'react-bootstrap/Button';
@@ -88,6 +88,11 @@ export default function SimulacaoCreditoComponent (): ReactElement {
                               )
                             })                                                                                                                                                                 
                       }
+                      <td>
+                        <Link to={`/oferta/${id}/${cod}`} 
+                              className="btn btn-sm btn-info float-start me-4">Simular
+                        </Link>
+                      </td>
                       </tr>
                   </tbody>
               </Table>

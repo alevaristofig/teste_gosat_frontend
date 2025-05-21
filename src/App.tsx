@@ -7,6 +7,7 @@ import LoginComponet from './components/LoginComponent';
 import ConsultaCreditoComponent from './components/ConsultaCreditoComponent';
 import SimulacaoCreditoComponent from './components/SimulacaoCreditoComponent';
 import MelhorOfertaComponent from './components/MelhorOfertaComponent';
+import OfertaComponent from './components/OfertaComponent';
 
 const App: React.FC = () => {
 
@@ -20,9 +21,10 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/login" element={<LoginComponet />} />
           <Route path="/consultarcredito" element={<ConsultaCreditoComponent />} />
-          <Route path="/simularcredito/:id/:cod" element={<SimulacaoCreditoComponent />} />
+          <Route path="/simularcredito/:id/:cod/:nome" element={<SimulacaoCreditoComponent />} />
           <Route path="/melhoroferta" element={<MelhorOfertaComponent />} />
-         </Routes>         
+          <Route path="/oferta/:id/:cod" element={<OfertaComponent />} />
+        </Routes>         
     </BrowserRouter>
   )
 }

@@ -1,32 +1,21 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Card  from 'react-bootstrap/Card';
-import Button  from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
 import Alert  from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 
 import MenuComponent from './menu';
 
-import { ICredito } from '../interfaces/Credito';
 import axios from 'axios';
-
-interface Props {
-  listaOfertasCredito: ICredito[],
-}
 
 type Modalidade = {
   nome: string,
   cod: string
-  // outros campos, se houver
 }
 
-//export default function ConsultaCreditoComponent ({listaOfertasCredito}): Props {
 export default function ConsultaCreditoComponent (): ReactElement {
   
   const [consultaOferta,setConsultaOferta] = useState([]);
   const [loading,setLoading] = useState(true);
-
 
   const navigate = useNavigate();
 
@@ -55,8 +44,6 @@ export default function ConsultaCreditoComponent (): ReactElement {
               setConsultaOferta([]);
           });          
   },[]);
-
-  const simular = (e: React.MouseEvent<HTMLButtonElement>,indice: number) => {}
 
   return (
     <div>
@@ -96,8 +83,9 @@ export default function ConsultaCreditoComponent (): ReactElement {
                                       <>
                                       <td>{m['nome']}</td>
                                       <td>
-                                        <Link to={`/simularcredito/${c['id']}/${m['cod']}`} 
-                                          className="btn btn-sm btn-info text-white float-start me-4">Simular</Link>                                                                                                          
+                                        <Link to={`/simularcredito/${c['id']}/${m['cod']}/${c['nome']}`} 
+                                          className="btn btn-sm btn-info text-white float-start me-4">Simular
+                                        </Link>                                                                                                          
                                       </td>
                                     </>
                                     ))

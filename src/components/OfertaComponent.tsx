@@ -1,7 +1,6 @@
 import React, { ReactElement, useState, useEffect, MouseEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-
 import Card  from 'react-bootstrap/Card';
 import Button  from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
@@ -12,65 +11,48 @@ import axios from 'axios';
 
 import MenuComponent from './menu';
 
-export default function MelhorOfertaComponent (): ReactElement {
+export default function OfertaComponent (): ReactElement {
+
+    const { id, cod } = useParams();
 
     const [ofertas,setOfertas] = useState([]);
     const [loading,setLoading] = useState(true);
+
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(sessionStorage.getItem('token') === null) {            
-            navigate('/login');
-        } 
 
-        let data = {
-            'cpf': sessionStorage.getItem('cpf')
-        }
+      if(sessionStorage.getItem('token') === null) {            
+        navigate('/login');
+      } 
 
-        axios.post(`http://localhost:8000/api/v1/simulacao/melhoresofertas`,data,
-          {
-              headers: {
-                  "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  
-              }
-          })
-          .then((response) => {   
-            console.log(response.data);                                 
-              setOfertas(response.data); 
-              setLoading(false);              
-          })
-          .catch((erro) => {
-              console.log(erro)              
-          }); 
-    },[]);
-
-    const salvar = (e: React.MouseEvent<HTMLButtonElement>,indice: number) => {
-
-        let data = {
-            'cpf': ofertas[indice]['cpf'],
-            'id_instiuicao': ofertas[indice]['id'],
-            'instituicao_financeira': ofertas[indice]['instituicaoFinanceira'],
-            'modalidade_credito': ofertas[indice]['modalidadeCredito'],
-            'valor_a_pagar': ofertas[indice]['oferta']['valorAPagar'],
-            'valor_solicitado': ofertas[indice]['oferta']['valorSolicitado'],
-            'taxa_juros': ofertas[indice]['oferta']['valorSolicitado'],
-            'qnt_parcelas': ofertas[indice]['oferta']['qntParcelas']
-        }
-
-        axios.post(`http://localhost:8000/api/v1/simulacao/salvaoferta`,data,
-          {
-              headers: {
-                  "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  
-              }
-          })
-          .then((response) => {                                    
-              toast.success("Oferta cadastrada com Sucesso!");              
-          })
-          .catch((erro) => {
-              toast.error('Ocorreu um erro e a oferta não foi cadastrada');           
-          }); 
+    let data = {
+      'cpf': sessionStorage.getItem('cpf'),
+      'instituicao_id': id,
+      'codModalidade': cod
     }
 
-    return (
+    axios.post(`http://localhost:8000/api/v1/simulacao/calcularoferta`,data,
+          {
+              headers: {
+                  "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  
+              }
+          })
+          .then((response) => {
+            console.log(response.data)
+
+            setOfertas(response.data);             
+            setLoading(false);           
+          })
+          .catch((erro) => {
+              toast.error('Ocorreu um erro e a operação não foi realizada');     
+          });          
+    },[]);
+
+    const salvar = (e: React.MouseEvent<HTMLButtonElement>,indice: number) => {}
+    
+
+    return(
         <>
             <div className='d-flex'>
                 <MenuComponent />
@@ -78,15 +60,14 @@ export default function MelhorOfertaComponent (): ReactElement {
                     <div>
                         <ToastContainer />
                     </div>
-                    <div>
-                        {
+                    {
                         loading
                         ?
                             <div className="spinner-border text-primary mt-3" role="status">
                                 <span className="visually-hidden">Loading...</span>
                             </div>
                         :
-                            ofertas.length === 0
+                            typeof ofertas === 'string'
                             ?
                                 <Alert variant='info'>
                                     Não existem dados para exibir
@@ -105,16 +86,25 @@ export default function MelhorOfertaComponent (): ReactElement {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         {                        
+                                        {                        
                                             ofertas.map((o,i) => 
                                             (
                                                 <tr key={i}>
                                                     <td>{o['instituicaoFinanceira']}</td>
                                                     <td>{o['modalidadeCredito']}</td> 
-                                                    <td>{o['oferta']['valorSolicitado']}</td>   
-                                                    <td>{o['oferta']['valorAPagar']}</td> 
-                                                    <td>{o['oferta']['taxaJuros']}</td> 
-                                                    <td>{o['oferta']['qntParcelas']}</td>  
+                                                    <td>
+                                                        {(o['oferta1']['valorSolicitado'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                    </td>   
+                                                    <td>
+                                                        {(o['oferta1']['valorAPagar'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}                                                        
+                                                    </td> 
+                                                    <td>
+                                                        {(o['oferta1']['taxaJuros'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}                                                        
+                                                    </td> 
+                                                    <td>{o['oferta1']['qntParcelas']}</td>  
                                                     <td>
                                                         <button className="btn btn-sm btn-info" 
                                                             onClick={(e) => salvar(e, i)}>
@@ -126,8 +116,7 @@ export default function MelhorOfertaComponent (): ReactElement {
                                         }  
                                     </tbody>
                                 </Table>
-                        }
-                    </div>
+                    }
                 </div>
             </div>
         </>
