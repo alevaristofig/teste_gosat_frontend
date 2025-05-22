@@ -83,7 +83,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
                                       <>
                                       <td>{m['nome']}</td>
                                       <td>
-                                        <Link to={`/simularcredito/${c['id']}/${m['cod']}/${c['nome']}`} 
+                                        <Link to={`/simularcredito/${c['id']}/${m['cod']}/${c['nome']}/${m['nome']}`} 
                                           className="btn btn-sm btn-info text-white float-start me-4">Simular
                                         </Link>                                                                                                          
                                       </td>

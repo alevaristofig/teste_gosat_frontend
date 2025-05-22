@@ -21,9 +21,9 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/login" element={<LoginComponet />} />
           <Route path="/consultarcredito" element={<ConsultaCreditoComponent />} />
-          <Route path="/simularcredito/:id/:cod/:nome" element={<SimulacaoCreditoComponent />} />
+          <Route path="/simularcredito/:id/:cod/:nome/:modalidade" element={<SimulacaoCreditoComponent />} />
           <Route path="/melhoroferta" element={<MelhorOfertaComponent />} />
-          <Route path="/oferta/:id/:cod" element={<OfertaComponent />} />
+          <Route path="/oferta/:id/:cod/:nome/:modalidade" element={<OfertaComponent />} />
         </Routes>         
     </BrowserRouter>
   )

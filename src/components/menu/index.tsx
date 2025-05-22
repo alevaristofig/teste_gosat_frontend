@@ -18,12 +18,12 @@ const MenuComponent = () => {
           <NavLink to='/consultarcredito' className='list-group-item list-group-item-action mb-2'>
                 <IconeOferta fontSize={24} color='blue' /> Consultar Crédito
           </NavLink>
-          <NavLink to='/simularcredito' className='list-group-item list-group-item-action' aria-disabled="true">
-                <IconeSimulacao fontSize={24} color='blue' /> Simular Crédito
-          </NavLink>
-          <NavLink to='/oferta' className='list-group-item list-group-item-action' aria-disabled="true">
-                <IconOferta fontSize={24} color='blue' /> Ofertas de Crédito
-          </NavLink>
+          <span className='list-group-item list-group-item-action'>
+            <IconeSimulacao fontSize={24} color='blue' /> Simular Crédito
+          </span>
+          <span className='list-group-item list-group-item-action'>
+            <IconOferta fontSize={24} color='blue' /> Ofertas de Crédito
+          </span>
           <NavLink to='/melhoroferta' className='list-group-item list-group-item-action'>
                 <IconeMelhorOferta fontSize={24} color='blue' /> Melhores Ofertas
           </NavLink>

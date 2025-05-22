@@ -1,9 +1,6 @@
 import React, { ReactElement, useState, useEffect, MouseEvent } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import Card  from 'react-bootstrap/Card';
-import Button  from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
 import Alert  from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 
@@ -13,7 +10,7 @@ import MenuComponent from './menu';
 
 export default function OfertaComponent (): ReactElement {
 
-    const { id, cod } = useParams();
+    const { id, cod, nome, modalidade } = useParams();
 
     const [ofertas,setOfertas] = useState([]);
     const [loading,setLoading] = useState(true);
@@ -49,7 +46,36 @@ export default function OfertaComponent (): ReactElement {
           });          
     },[]);
 
-    const salvar = (e: React.MouseEvent<HTMLButtonElement>,indice: number) => {}
+    const salvar = (e: React.MouseEvent<HTMLButtonElement>, idOferta: number) => {
+
+        setLoading(true); 
+        
+        let data = {
+            'cpf': sessionStorage.getItem('cpf'),
+            'id_instiuicao': id,
+            'instituicao_financeira': nome,
+            'modalidade_credito': modalidade,
+            'valor_a_pagar': ofertas[0][`oferta${idOferta}`]['valorAPagar'],
+            'valor_solicitado': ofertas[0][`oferta${idOferta}`]['valorSolicitado'],
+            'taxa_juros': ofertas[0][`oferta${idOferta}`]['taxaJuros'],
+            'qnt_parcelas': ofertas[0][`oferta${idOferta}`]['qntParcelas']
+        }
+
+        axios.post(`http://localhost:8000/api/v1/simulacao/salvaoferta`,data,
+          {
+              headers: {
+                  "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  
+              }
+          })
+          .then((response) => {                                    
+              toast.success("Oferta cadastrada com Sucesso!"); 
+              setLoading(false);              
+          })
+          .catch((erro) => {
+              toast.error('Ocorreu um erro e a oferta não foi cadastrada');   
+              setLoading(false);         
+          }); 
+    }
     
 
     return(
@@ -89,9 +115,10 @@ export default function OfertaComponent (): ReactElement {
                                         {                        
                                             ofertas.map((o,i) => 
                                             (
+                                                <>
                                                 <tr key={i}>
-                                                    <td>{o['instituicaoFinanceira']}</td>
-                                                    <td>{o['modalidadeCredito']}</td> 
+                                                    <td>{nome}</td>
+                                                    <td>{modalidade}</td> 
                                                     <td>
                                                         {(o['oferta1']['valorSolicitado'] as number)
                                                             .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
@@ -107,11 +134,35 @@ export default function OfertaComponent (): ReactElement {
                                                     <td>{o['oferta1']['qntParcelas']}</td>  
                                                     <td>
                                                         <button className="btn btn-sm btn-info" 
-                                                            onClick={(e) => salvar(e, i)}>
+                                                            onClick={(e) => salvar(e, o['oferta1']['idOferta'])}>
                                                             Confirmar Oferta
                                                         </button>                                                                                                                
                                                     </td>                                               
                                                 </tr>
+                                                <tr key={i}>
+                                                    <td>{nome}</td>
+                                                    <td>{modalidade}</td> 
+                                                    <td>
+                                                        {(o['oferta2']['valorSolicitado'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                    </td>   
+                                                    <td>
+                                                        {(o['oferta2']['valorAPagar'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}                                                        
+                                                    </td> 
+                                                    <td>
+                                                        {(o['oferta2']['taxaJuros'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}                                                        
+                                                    </td> 
+                                                    <td>{o['oferta2']['qntParcelas']}</td>  
+                                                    <td>
+                                                        <button className="btn btn-sm btn-info" 
+                                                            onClick={(e) => salvar(e, o['oferta2']['idOferta'])}>
+                                                            Confirmar Oferta
+                                                        </button>                                                                                                                
+                                                    </td>                                               
+                                                </tr>
+                                                </>
                                             ))
                                         }  
                                     </tbody>
