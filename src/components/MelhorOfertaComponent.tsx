@@ -2,9 +2,6 @@ import React, { ReactElement, useState, useEffect, MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
-import Card  from 'react-bootstrap/Card';
-import Button  from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
 import Alert  from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 
@@ -33,13 +30,12 @@ export default function MelhorOfertaComponent (): ReactElement {
                   "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  
               }
           })
-          .then((response) => {   
-            console.log(response.data);                                 
+          .then((response) => {                                            
               setOfertas(response.data); 
               setLoading(false);              
           })
           .catch((erro) => {
-              console.log(erro)              
+              toast.error('Ocorreu um erro e a operação não foi realizada');              
           }); 
     },[]);
 

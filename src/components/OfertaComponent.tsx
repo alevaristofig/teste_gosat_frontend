@@ -36,8 +36,6 @@ export default function OfertaComponent (): ReactElement {
               }
           })
           .then((response) => {
-            console.log(response.data)
-
             setOfertas(response.data);             
             setLoading(false);           
           })

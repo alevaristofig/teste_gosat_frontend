@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 import axios from 'axios';
 
@@ -27,13 +28,16 @@ export default function ConsultaCreditoComponent (): ReactElement {
 			 navigate('/consultarcredito', {replace: true});
           })
           .catch((erro) => {
-              console.log(erro)             
+              toast.error('Email/Senha incorretos');             
           });  
 	}
 
     return(
         <>
             <div className={styles.input_container}>
+				<div>
+					<ToastContainer />
+				</div>
                 <div className="row mt-3">
                     <div className="col-4 text-end mt-3">
 						<label className="form-label">E-mail</label>

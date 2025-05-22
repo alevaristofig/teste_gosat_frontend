@@ -1,5 +1,6 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import Alert  from 'react-bootstrap/Alert';
 import Table from 'react-bootstrap/Table';
 
@@ -40,8 +41,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
               setLoading(false);              
           })
           .catch((erro) => {
-              console.log(erro)
-              setConsultaOferta([]);
+               toast.error('Ocorreu um erro e a operação não foi realizada');               
           });          
   },[]);
 
@@ -51,6 +51,9 @@ export default function ConsultaCreditoComponent (): ReactElement {
         <MenuComponent />
         <div className="container-fluid">
           <div>
+            <div>
+                <ToastContainer />
+            </div>
           {
             loading
             ?
