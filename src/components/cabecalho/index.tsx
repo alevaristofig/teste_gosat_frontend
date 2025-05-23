@@ -12,7 +12,8 @@ export default function CabecalhoComponent (): ReactElement {
     const navigate = useNavigate();
 
     function logout() {
-        axios.get(`http://localhost:8000/api/v1/simulacao/logout`)
+        //axios.get(`http://localhost:8000/api/v1/simulacao/logout`)
+         axios.get(`http://ec2-54-242-207-206.compute-1.amazonaws.com:8000/api/v1/simulacao/logout`)
           .then(() => {                                			 
 			 sessionStorage.removeItem('token');
 			 sessionStorage.removeItem('cpf');
