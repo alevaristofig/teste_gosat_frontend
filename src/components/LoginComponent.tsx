@@ -21,7 +21,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
 		}
 
 		//axios.post(`http://localhost:8000/api/v1/simulacao/login`,data)
-		axios.post(`http://ec2-54-242-207-206.compute-1.amazonaws.com:8000/api/v1/simulacao/login`,data)
+		axios.post(`https://ec2-54-242-207-206.compute-1.amazonaws.com:8000/api/v1/simulacao/login`,data)
           .then((response) => {                                			 
 			 sessionStorage.setItem('token',response.data.original.token);
 			 sessionStorage.setItem('cpf',response.data.original.cpf);
