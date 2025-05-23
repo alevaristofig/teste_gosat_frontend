@@ -28,8 +28,9 @@ export default function ConsultaCreditoComponent (): ReactElement {
 
 			 navigate('/consultarcredito', {replace: true});
           })
-          .catch((erro) => {
-              toast.error('Email/Senha incorretos');             
+          .catch((error) => {
+              toast.error('Email/Senha incorretos');  
+			  console.log(error)           
           });  
 	}
 
