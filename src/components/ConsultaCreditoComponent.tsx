@@ -30,8 +30,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
       'cpf': sessionStorage.getItem('cpf')
     }
 
-    //axios.post(`http://localhost:8000/api/v1/simulacao/consultacredito`,data,
-    axios.post(`http://ec2-54-242-207-206.compute-1.amazonaws.com:8000/api/v1/simulacao/consultacredito`,data,
+    axios.post(`http://localhost:8000/api/v1/simulacao/consultacredito`,data,    
           {
               headers: {
                   "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  

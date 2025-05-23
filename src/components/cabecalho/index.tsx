@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 import axios from 'axios';
 
@@ -12,8 +12,7 @@ export default function CabecalhoComponent (): ReactElement {
     const navigate = useNavigate();
 
     function logout() {
-        //axios.get(`http://localhost:8000/api/v1/simulacao/logout`)
-         axios.get(`http://ec2-54-242-207-206.compute-1.amazonaws.com:8000/api/v1/simulacao/logout`)
+        axios.get(`http://localhost:8000/api/v1/simulacao/logout`)         
           .then(() => {                                			 
 			 sessionStorage.removeItem('token');
 			 sessionStorage.removeItem('cpf');
@@ -21,7 +20,7 @@ export default function CabecalhoComponent (): ReactElement {
 			 navigate('/login', {replace: true});
           })
           .catch((erro) => {
-              console.log(erro)             
+              toast.error('Ocorreu um erro e a operação não foi realizada');                  
           });
     }
   return(
@@ -29,6 +28,9 @@ export default function CabecalhoComponent (): ReactElement {
               <Navbar bg='primary' className='menu_superior'>                
                   <Container>
                       <h3 className='text-white'>Sistema de Crédito</h3>
+                      <div>
+                        <ToastContainer />
+                    </div>
                       <div className='navbar-nav'>
                           <ul className='navbar-nav'>
                               <li className='nav-item'>

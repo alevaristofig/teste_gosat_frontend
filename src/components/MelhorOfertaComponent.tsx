@@ -24,8 +24,7 @@ export default function MelhorOfertaComponent (): ReactElement {
             'cpf': sessionStorage.getItem('cpf')
         }
 
-       // axios.post(`http://localhost:8000/api/v1/simulacao/melhoresofertas`,data,
-       axios.post(`http://ec2-54-242-207-206.compute-1.amazonaws.com:8000/api/v1/simulacao/melhoresofertas`,data,
+        axios.post(`http://localhost:8000/api/v1/simulacao/melhoresofertas`,data,       
           {
               headers: {
                   "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  

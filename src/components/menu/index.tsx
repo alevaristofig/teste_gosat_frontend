@@ -33,16 +33,3 @@ const MenuComponent = () => {
 };
 
 export default MenuComponent; 
-/*export default function MenuComponent (): ReactElement {
-   // const Icon = HiDocumentSearch as unknown as React.FC<React.SVGProps<SVGSVGElement>>;
-
-    return(
-        <>
-          <div className='menu_esquerdo list-group'>
-            <NavLink id='urlEmpresas' to='/consultarcredito' className='list-group-item list-group-item-action'>
-                 <HiDocumentSearch color='blue' size={24}/> Consultar Crédito
-            </NavLink>
-          </div>
-        </>
-    )
-}*/
