@@ -29,7 +29,8 @@ export default function SimulacaoCreditoComponent (): ReactElement {
       'codModalidade': cod
     }
 
-    axios.post(`http://localhost:8000/api/v1/simulacao/simulacredito`,data,
+    //axios.post(`http://localhost:8000/api/v1/simulacao/simulacredito`,data,
+    axios.post(`http://ec2-54-242-207-206.compute-1.amazonaws.com:8000/api/v1/simulacao/simulacredito`,data,
           {
               headers: {
                   "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  

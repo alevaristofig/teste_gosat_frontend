@@ -29,7 +29,8 @@ export default function OfertaComponent (): ReactElement {
       'codModalidade': cod
     }
 
-    axios.post(`http://localhost:8000/api/v1/simulacao/calcularoferta`,data,
+    //axios.post(`http://localhost:8000/api/v1/simulacao/calcularoferta`,data,
+    axios.post(`http://ec2-54-242-207-206.compute-1.amazonaws.com:8000/api/v1/simulacao/calcularoferta`,data,
           {
               headers: {
                   "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  
@@ -59,7 +60,8 @@ export default function OfertaComponent (): ReactElement {
             'qnt_parcelas': ofertas[0][`oferta${idOferta}`]['qntParcelas']
         }
 
-        axios.post(`http://localhost:8000/api/v1/simulacao/salvaoferta`,data,
+        //axios.post(`http://localhost:8000/api/v1/simulacao/salvaoferta`,data,
+        axios.post(`http://ec2-54-242-207-206.compute-1.amazonaws.com:8000/api/v1/simulacao/salvaoferta`,data,
           {
               headers: {
                   "Authorization": `Bearer ${sessionStorage.getItem('token')}`,                  

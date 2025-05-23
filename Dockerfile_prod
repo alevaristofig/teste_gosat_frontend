@@ -1,0 +1,26 @@
+# Etapa de build
+FROM node:18 AS build
+
+# Define diretório de trabalho
+WORKDIR /app
+
+# Copia os arquivos de dependência e instala
+COPY package*.json ./
+RUN npm install
+
+# Copia o restante da aplicação e gera o build
+COPY . .
+RUN npm run build
+
+# Etapa final: container mínimo com Nginx
+FROM nginx:alpine
+
+# Remove o site padrão do Nginx
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copia os arquivos do build do React
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
