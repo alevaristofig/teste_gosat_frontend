@@ -68,7 +68,7 @@ export default function MelhorOfertaComponent (): ReactElement {
 
     return (
         <>
-            <div className='d-flex'>
+            <div className='d-flex mt-3'>
                 <MenuComponent />
                 <div className="container-fluid">
                     <div>
@@ -107,12 +107,24 @@ export default function MelhorOfertaComponent (): ReactElement {
                                                 <tr key={i}>
                                                     <td>{o['instituicaoFinanceira']}</td>
                                                     <td>{o['modalidadeCredito']}</td> 
-                                                    <td>{o['oferta']['valorSolicitado']}</td>   
-                                                    <td>{o['oferta']['valorAPagar']}</td> 
-                                                    <td>{o['oferta']['taxaJuros']}</td> 
-                                                    <td>{o['oferta']['qntParcelas']}</td>  
+                                                    <td>                                                        
+                                                         {(o['oferta']['valorSolicitado'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                    </td>   
+                                                    <td>                                                        
+                                                         {(o['oferta']['valorAPagar'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                    </td> 
+                                                    <td>                                                        
+                                                        {(o['oferta']['taxaJuros'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                    </td> 
+                                                    <td>                                                        
+                                                        {(o['oferta']['qntParcelas'] as number)
+                                                            .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                    </td>  
                                                     <td>
-                                                        <button className="btn btn-sm btn-info" 
+                                                        <button className="btn btn-sm btn-info text-white" 
                                                             onClick={(e) => salvar(e, i)}>
                                                             Confirmar Oferta
                                                         </button>                                                                                                                

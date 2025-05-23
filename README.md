@@ -1,1 +1,1 @@
-# teste_gosat_frontend
+As instruções estão no readme do projeto_fianceiro

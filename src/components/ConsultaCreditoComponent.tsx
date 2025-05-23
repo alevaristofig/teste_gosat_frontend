@@ -47,7 +47,7 @@ export default function ConsultaCreditoComponent (): ReactElement {
 
   return (
     <div>
-      <div className='d-flex'>
+      <div className='d-flex mt-3'>
         <MenuComponent />
         <div className="container-fluid">
           <div>

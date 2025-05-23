@@ -78,7 +78,7 @@ export default function OfertaComponent (): ReactElement {
 
     return(
         <>
-            <div className='d-flex'>
+            <div className='d-flex mt-3'>
                 <MenuComponent />
                 <div className="container-fluid">
                     <div>
@@ -131,7 +131,7 @@ export default function OfertaComponent (): ReactElement {
                                                     </td> 
                                                     <td>{o['oferta1']['qntParcelas']}</td>  
                                                     <td>
-                                                        <button className="btn btn-sm btn-info" 
+                                                        <button className="btn btn-sm btn-info text-white" 
                                                             onClick={(e) => salvar(e, o['oferta1']['idOferta'])}>
                                                             Confirmar Oferta
                                                         </button>                                                                                                                

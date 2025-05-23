@@ -27,7 +27,7 @@ export default function CabecalhoComponent (): ReactElement {
           <>
               <Navbar bg='primary' className='menu_superior'>                
                   <Container>
-                      <h3 className='text-white'>Sistema de Crédito</h3>
+                      <div className='col-2'><h3 className='text-white'>Sistema de Crédito</h3></div>
                       <div>
                         <ToastContainer />
                     </div>
